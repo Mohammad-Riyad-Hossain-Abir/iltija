@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ইলতিজা — Pharmacology Question Bank</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e1a;--bg2:#111827;--bg3:#1a2236;--bg4:#1f2d47;
+  --border:#2a3650;--border2:#3a4a6a;
+  --accent:#60a5fa;--accent2:#f87171;--accent3:#4ade80;--accent4:#fbbf24;--accent5:#c084fc;
+  --text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
+  --radius:10px;
+  --shadow:0 4px 20px rgba(0,0,0,0.4);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;}
+
+/* ===== HEADER ===== */
+.site-header{
+  background:linear-gradient(180deg,#0d1526 0%,#0a0e1a 100%);
+  border-bottom:1px solid var(--border);
+  text-align:center;padding:22px 16px 18px;
+  position:relative;overflow:hidden;
+}
+.site-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(96,165,250,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.init-tag{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--accent);opacity:0.65;margin-bottom:8px;
+}
+.site-title{
+  font-family:'Noto Serif Bengali',serif;
+  font-size:clamp(32px,7vw,56px);font-weight:700;line-height:1.1;
+  background:linear-gradient(135deg,#93c5fd 0%,#60a5fa 40%,#a5b4fc 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:6px;
+}
+.site-sub{
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--text3);letter-spacing:1px;margin-bottom:6px;
+}
+.stats-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.stat-pill{
+  padding:3px 10px;border-radius:20px;font-size:11px;
+  font-family:'JetBrains Mono',monospace;
+  background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.25);
+  color:var(--accent);
+}
+
+/* ===== CONTROLS ===== */
+.controls{
+  background:rgba(17,24,39,0.95);border-bottom:1px solid var(--border);
+  padding:12px 16px;position:sticky;top:0;z-index:200;
+  backdrop-filter:blur(12px);
+}
+.ctrl-inner{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:8px;}
+.search-wrap{position:relative;}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:15px;pointer-events:none;}
+.search-box{
+  width:100%;background:var(--bg3);border:1px solid var(--border);
+  color:var(--text);padding:10px 12px 10px 38px;border-radius:var(--radius);
+  font-size:14px;font-family:'Hind Siliguri',sans-serif;
+  outline:none;transition:border-color 0.2s,box-shadow 0.2s;
+}
+.search-box:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(96,165,250,0.1);}
+.search-box::placeholder{color:var(--text3);}
+.filter-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.flabel{font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;
+  font-family:'JetBrains Mono',monospace;white-space:nowrap;padding:0 2px;}
+.fbtn{
+  padding:4px 10px;border-radius:20px;border:1px solid var(--border);
+  background:var(--bg3);color:var(--text2);font-size:11.5px;cursor:pointer;
+  transition:all 0.15s;font-family:'Hind Siliguri',sans-serif;white-space:nowrap;
+  font-weight:500;
+}
+.fbtn:hover{border-color:var(--accent2);color:var(--accent2);}
+.fbtn.active{background:var(--accent4);color:#0a0e1a;border-color:var(--accent4);font-weight:700;}
+.fbtn.uni-active-DU{background:#4ade80;color:#0a0e1a;border-color:#4ade80;}
+.fbtn.uni-active-SU{background:#60a5fa;color:#0a0e1a;border-color:#60a5fa;}
+.fbtn.uni-active-RU{background:#f87171;color:#0a0e1a;border-color:#f87171;}
+.fbtn.uni-active-CU{background:#fbbf24;color:#0a0e1a;border-color:#fbbf24;}
+.fbtn.uni-active-RMU{background:#c084fc;color:#0a0e1a;border-color:#c084fc;}
+.fbtn.uni-active-CMU{background:#fb923c;color:#0a0e1a;border-color:#fb923c;}
+.fbtn.uni-active-BUP{background:#34d399;color:#0a0e1a;border-color:#34d399;}
+.fbtn.uni-active-SMU{background:#7dd3fc;color:#0a0e1a;border-color:#7dd3fc;}
+.fbtn.uni-active-ALL{background:var(--accent4);color:#0a0e1a;border-color:var(--accent4);}
+
+/* ===== LAYOUT ===== */
+.layout{max-width:1280px;margin:0 auto;display:flex;min-height:calc(100vh - 200px);}
+.sidebar{
+  width:220px;min-width:220px;padding:14px 10px;
+  position:sticky;top:105px;height:calc(100vh - 105px);
+  overflow-y:auto;border-right:1px solid var(--border);
+  flex-shrink:0;
+}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.sb-title{font-size:10px;color:var(--text3);text-transform:uppercase;
+  letter-spacing:2px;margin-bottom:10px;font-family:'JetBrains Mono',monospace;padding:0 4px;}
+.tbtn{
+  display:flex;align-items:center;gap:6px;width:100%;text-align:left;
+  padding:7px 8px;background:none;border:none;color:var(--text2);cursor:pointer;
+  font-size:12px;border-radius:6px;margin-bottom:1px;transition:all 0.15s;
+  font-family:'Hind Siliguri',sans-serif;border:1px solid transparent;
+}
+.tbtn:hover{background:var(--bg3);color:var(--text);}
+.tbtn.active{background:var(--bg4);color:var(--accent);border-color:rgba(96,165,250,0.3);}
+.tbtn .ticon{font-size:13px;flex-shrink:0;}
+.tbtn .tname{flex:1;line-height:1.3;}
+.tbtn .tcnt{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:10px;
+  flex-shrink:0;
+}
+.tbtn.active .tcnt{background:rgba(96,165,250,0.2);}
+
+/* ===== MOBILE TOPIC SCROLL ===== */
+.mob-topics{
+  display:none;overflow-x:auto;white-space:nowrap;
+  padding:8px 12px 6px;border-bottom:1px solid var(--border);
+  background:var(--bg2);-webkit-overflow-scrolling:touch;
+}
+.mob-topics::-webkit-scrollbar{display:none;}
+.mob-tbtn{
+  display:inline-block;padding:5px 10px;background:var(--bg3);
+  border:1px solid var(--border);color:var(--text2);border-radius:16px;
+  font-size:11px;cursor:pointer;margin-right:4px;
+  font-family:'Hind Siliguri',sans-serif;transition:all 0.15s;
+}
+.mob-tbtn.active{background:var(--accent);color:#0a0e1a;border-color:var(--accent);font-weight:700;}
+@media(max-width:768px){
+  .sidebar{display:none;}
+  .mob-topics{display:block;}
+  .layout{flex-direction:column;}
+}
+
+/* ===== QUESTION LIST ===== */
+.main{flex:1;padding:12px 14px;min-width:0;}
+.result-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:6px 2px 10px;font-size:11px;color:var(--text3);
+  font-family:'JetBrains Mono',monospace;flex-wrap:wrap;gap:4px;
+}
+.q-list{display:flex;flex-direction:column;gap:7px;}
+
+.q-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.q-card:hover{border-color:var(--border2);}
+.q-card.open{border-color:rgba(96,165,250,0.4);box-shadow:0 2px 12px rgba(96,165,250,0.06);}
+
+.q-header{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:11px 13px;cursor:pointer;user-select:none;
+}
+.q-num{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text3);min-width:30px;padding-top:3px;flex-shrink:0;
+}
+.q-chevron{
+  width:18px;height:18px;min-width:18px;border-radius:50%;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:var(--text3);margin-top:2px;
+  transition:all 0.2s;flex-shrink:0;
+}
+.q-card.open .q-chevron{background:var(--accent);color:#0a0e1a;border-color:var(--accent);transform:rotate(180deg);}
+.q-body{flex:1;min-width:0;}
+.q-text{font-size:13.5px;line-height:1.65;color:var(--text);font-weight:500;}
+.q-meta{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px;align-items:center;}
+
+/* University badges */
+.ub{padding:2px 7px;border-radius:12px;font-size:10px;font-weight:700;
+    font-family:'JetBrains Mono',monospace;letter-spacing:0.3px;cursor:pointer;transition:opacity 0.15s;}
+.ub:hover{opacity:0.8;}
+.ub-DU{background:rgba(74,222,128,0.12);color:#4ade80;border:1px solid rgba(74,222,128,0.3);}
+.ub-SU{background:rgba(96,165,250,0.12);color:#93c5fd;border:1px solid rgba(96,165,250,0.3);}
+.ub-RU{background:rgba(248,113,113,0.12);color:#fca5a5;border:1px solid rgba(248,113,113,0.3);}
+.ub-CU{background:rgba(251,191,36,0.12);color:#fcd34d;border:1px solid rgba(251,191,36,0.3);}
+.ub-RMU{background:rgba(192,132,252,0.12);color:#d8b4fe;border:1px solid rgba(192,132,252,0.3);}
+.ub-CMU{background:rgba(251,146,60,0.12);color:#fdba74;border:1px solid rgba(251,146,60,0.3);}
+.ub-BUP{background:rgba(52,211,153,0.12);color:#6ee7b7;border:1px solid rgba(52,211,153,0.3);}
+.ub-SMU{background:rgba(125,211,252,0.12);color:#bae6fd;border:1px solid rgba(125,211,252,0.3);}
+.ub-SUST{background:rgba(240,136,70,0.12);color:#f0a868;border:1px solid rgba(240,136,70,0.3);}
+
+/* Answer section */
+.q-answer{
+  display:none;border-top:1px solid var(--border);
+  background:rgba(96,165,250,0.02);
+}
+.q-card.open .q-answer{display:block;}
+.ans-inner{padding:12px 13px 13px;}
+.ans-content{
+  font-size:13px;line-height:1.85;color:var(--text2);
+  white-space:pre-wrap;word-break:break-word;
+}
+.ans-content .ref{color:var(--accent4);font-size:11.5px;}
+.no-ans-label{
+  font-size:12px;color:var(--text3);font-style:italic;
+  padding:4px 0 8px;
+}
+
+/* AI button */
+.ai-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;margin-top:10px;
+  background:linear-gradient(135deg,rgba(96,165,250,0.1),rgba(192,132,252,0.1));
+  border:1px solid rgba(96,165,250,0.35);border-radius:8px;
+  color:var(--accent);font-size:12px;cursor:pointer;
+  font-family:'Hind Siliguri',sans-serif;transition:all 0.2s;
+}
+.ai-btn:hover{background:linear-gradient(135deg,rgba(96,165,250,0.2),rgba(192,132,252,0.2));
+  border-color:rgba(96,165,250,0.5);}
+.ai-btn:disabled{opacity:0.5;cursor:wait;}
+.ai-resp{
+  margin-top:10px;padding:12px;
+  background:rgba(96,165,250,0.04);border:1px solid rgba(96,165,250,0.15);
+  border-radius:8px;font-size:13px;line-height:1.8;color:var(--text);
+  display:none;white-space:pre-wrap;word-break:break-word;
+}
+.ai-resp.show{display:block;}
+.ai-resp.loading{color:var(--text3);font-style:italic;}
+
+/* Empty / loading states */
+.empty{text-align:center;padding:60px 20px;color:var(--text3);}
+.empty .eicon{font-size:36px;margin-bottom:12px;opacity:0.5;}
+.loading-state{text-align:center;padding:40px;color:var(--text3);}
+
+/* Pagination */
+.pager{display:flex;justify-content:center;align-items:center;gap:6px;padding:18px 0;flex-wrap:wrap;}
+.pbtn{
+  padding:6px 11px;background:var(--bg2);border:1px solid var(--border);
+  color:var(--text2);border-radius:6px;cursor:pointer;font-size:12px;
+  transition:all 0.15s;font-family:'JetBrains Mono',monospace;
+}
+.pbtn:hover{border-color:var(--accent);color:var(--accent);}
+.pbtn.active{background:var(--accent);color:#0a0e1a;border-color:var(--accent);font-weight:700;}
+.pbtn:disabled{opacity:0.3;cursor:default;pointer-events:none;}
+.pdots{color:var(--text3);font-size:12px;padding:0 2px;}
+
+/* Highlight */
+mark{background:rgba(251,191,36,0.25);color:var(--accent4);border-radius:2px;padding:0 1px;}
+
+/* No answer indicator */
+.q-card.no-ans .q-chevron{background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.3);color:var(--accent4);}
+
+@media(max-width:600px){
+  .main{padding:8px 8px;}
+  .q-header{padding:9px 10px;}
+  .q-text{font-size:13px;}
+  .filter-row{gap:3px;}
+  .fbtn{font-size:11px;padding:3px 7px;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="init-tag">✦ An initiative by Iltija ✦</div>
+  <h1 class="site-title">ইলতিজা</h1>
+  <p class="site-sub">Pharmacology &amp; Therapeutics — Question Bank</p>
+  <div class="stats-pills">
+    <span class="stat-pill" id="hdrTotal">⏳ Loading...</span>
+    <span class="stat-pill">arif's Pharmacology (11th Ed.)</span>
+    <span class="stat-pill">MBBS · BDS · FCPS</span>
+  </div>
+</header>
+
+<div class="mob-topics" id="mobTopics"></div>
+
+<div class="controls">
+  <div class="ctrl-inner">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-box" id="searchBox"
+        placeholder="প্রশ্ন খুঁজুন... (e.g. 'adrenaline', 'beta blocker', 'define pharmacology')">
+    </div>
+    <div class="filter-row">
+      <span class="flabel">Uni:</span>
+      <button class="fbtn active" id="ubALL" onclick="setUni('ALL',this)">All</button>
+      <button class="fbtn" id="ubDU"  onclick="setUni('DU',this)">DU</button>
+      <button class="fbtn" id="ubSU"  onclick="setUni('SU',this)">SU</button>
+      <button class="fbtn" id="ubRU"  onclick="setUni('RU',this)">RU</button>
+      <button class="fbtn" id="ubCU"  onclick="setUni('CU',this)">CU</button>
+      <button class="fbtn" id="ubRMU" onclick="setUni('RMU',this)">RMU</button>
+      <button class="fbtn" id="ubCMU" onclick="setUni('CMU',this)">CMU</button>
+      <button class="fbtn" id="ubBUP" onclick="setUni('BUP',this)">BUP</button>
+      <button class="fbtn" id="ubSMU" onclick="setUni('SMU',this)">SMU</button>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="main">
+    <div class="result-bar">
+      <span id="resultText">Loading...</span>
+      <span id="pageText"></span>
+    </div>
+    <div class="q-list" id="qList"></div>
+    <div class="pager" id="pager"></div>
+    <div style="text-align:center;padding:20px 0 30px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);letter-spacing:1.5px;">
+      ✦ An initiative by Iltija ✦
+    </div>
+  </main>
+</div>
+
+<script src="data.js"></script>
+<script>
+// Q is loaded from data.js
+
+const TOPICS = [
+  {id:'all', label:'All Topics', icon:'🔬'},
+  {id:'General Pharmacology', label:'General Pharmacology', icon:'💊'},
+  {id:'Autonomic Pharmacology', label:'Autonomic Pharmacology', icon:'🧠'},
+  {id:'Ocular Pharmacology', label:'Ocular Pharmacology', icon:'👁️'},
+  {id:'Cardiovascular Pharmacology', label:'Cardiovascular Pharmacology', icon:'❤️'},
+  {id:'Renal Pharmacology', label:'Renal Pharmacology', icon:'🫘'},
+  {id:'CNS Pharmacology', label:'CNS Pharmacology', icon:'⚡'},
+  {id:'Autacoids', label:'Autacoids', icon:'🔬'},
+  {id:'Ergot Derivatives', label:'Ergot Derivatives', icon:'🌿'},
+  {id:'NSAIDs', label:'NSAIDs', icon:'💊'},
+  {id:'Haematinics', label:'Haematinics', icon:'🩸'},
+  {id:'Respiratory Pharmacology', label:'Respiratory Pharmacology', icon:'🫁'},
+  {id:'Gastrointestinal Pharmacology', label:'GI Pharmacology', icon:'🫙'},
+  {id:'Endocrine Pharmacology', label:'Endocrine Pharmacology', icon:'⚗️'},
+  {id:'Antimicrobial Drugs', label:'Antimicrobial Drugs', icon:'🦠'},
+  {id:'Drugs For Specific Infection', label:'Drugs For Specific Infection', icon:'💉'},
+];
+
+let curTopic='all', curUni='ALL', curSearch='', curPage=1;
+const PER=30;
+let filtered=[];
+
+// Compute counts
+const topicCounts={};
+Q.forEach(q=>{ topicCounts[q.t]=(topicCounts[q.t]||0)+1; });
+const totalQ = Q.length;
+document.getElementById('hdrTotal').textContent = totalQ.toLocaleString()+' Questions';
+
+// Build sidebar
+function buildSidebar(){
+  const sb=document.getElementById('sidebar');
+  const mt=document.getElementById('mobTopics');
+  sb.innerHTML='<div class="sb-title">📚 Topics</div>';
+  TOPICS.forEach(t=>{
+    const cnt = t.id==='all' ? totalQ : (topicCounts[t.id]||0);
+    // Desktop
+    const btn=document.createElement('button');
+    btn.className='tbtn'+(t.id===curTopic?' active':'');
+    btn.innerHTML=`<span class="ticon">${t.icon}</span><span class="tname">${t.label}</span><span class="tcnt">${cnt}</span>`;
+    btn.onclick=()=>pickTopic(t.id);
+    sb.appendChild(btn);
+    // Mobile
+    const mb=document.createElement('span');
+    mb.className='mob-tbtn'+(t.id===curTopic?' active':'');
+    mb.textContent=t.icon+' '+(t.id==='all'?'All':t.label.replace(' Pharmacology','').replace('Drugs For Specific Infection','Specific Infection'));
+    mb.onclick=()=>pickTopic(t.id);
+    mt.appendChild(mb);
+  });
+}
+
+function pickTopic(id){
+  curTopic=id; curPage=1;
+  document.querySelectorAll('.tbtn').forEach((b,i)=>b.classList.toggle('active',TOPICS[i].id===id));
+  document.querySelectorAll('.mob-tbtn').forEach((b,i)=>b.classList.toggle('active',TOPICS[i].id===id));
+  applyFilters();
+}
+
+function setUni(uni,btn){
+  curUni=uni; curPage=1;
+  document.querySelectorAll('[id^="ub"]').forEach(b=>{
+    b.classList.remove('active');
+    const codes=['ALL','DU','SU','RU','CU','RMU','CMU','BUP','SMU'];
+    codes.forEach(c=>b.classList.remove('uni-active-'+c));
+  });
+  btn.classList.add('active','uni-active-'+uni);
+  applyFilters();
+}
+
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function highlight(text, q){
+  if(!q) return esc(text);
+  const e=esc(text);
+  const qe=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return e.replace(new RegExp('('+qe+')','gi'),'<mark>$1</mark>');
+}
+
+function fmtAns(a){
+  return esc(a).replace(/\(Ref:[^)]+\)/g,m=>`<span class="ref">${m}</span>`);
+}
+
+function applyFilters(){
+  const q=curSearch.toLowerCase().trim();
+  filtered=Q.filter(item=>{
+    if(curTopic!=='all' && item.t!==curTopic) return false;
+    if(curUni!=='ALL' && !item.u.includes(curUni)) return false;
+    if(q){
+      if(!item.q.toLowerCase().includes(q) && !item.a.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+  curPage=1;
+  render();
+}
+
+function render(){
+  const total=filtered.length;
+  const totalPages=Math.max(1,Math.ceil(total/PER));
+  if(curPage>totalPages) curPage=totalPages;
+  const start=(curPage-1)*PER, end=Math.min(start+PER,total);
+  const items=filtered.slice(start,end);
+
+  document.getElementById('resultText').textContent=
+    total.toLocaleString()+' results'+(curSearch?' for "'+curSearch+'"':'');
+  document.getElementById('pageText').textContent=
+    'Page '+curPage+' / '+totalPages;
+
+  const list=document.getElementById('qList');
+  list.innerHTML='';
+
+  if(!items.length){
+    list.innerHTML='<div class="empty"><div class="eicon">🔍</div><div>কোনো প্রশ্ন পাওয়া যায়নি।<br><small>Different search or filter try করুন।</small></div></div>';
+  } else {
+    const frag=document.createDocumentFragment();
+    items.forEach((item,idx)=>{
+      const globalIdx=start+idx+1;
+      const card=document.createElement('div');
+      const hasGoodAns = item.a && item.a.length >= 30;
+      card.className='q-card'+(hasGoodAns?'':' no-ans');
+      card.id='qc'+globalIdx;
+
+      const qClean=item.q.replace(/^Q[.,]\s*/,'');
+      const qHtml=highlight(qClean, curSearch);
+      const uniBadges=item.u.map(u=>`<span class="ub ub-${u}" onclick="event.stopPropagation();quickUni('${u}')">${u}</span>`).join('');
+
+      let ansHtml='';
+      if(hasGoodAns){
+        ansHtml=`<div class="ans-content">${fmtAns(item.a)}</div>`;
+      } else {
+        ansHtml=`<div class="no-ans-label">📝 এই প্রশ্নের উত্তর PDF-এ নেই বা টেবিল/ডায়াগ্রাম আছে।</div>`;
+      }
+
+      const aiHtml=(item.ai||!hasGoodAns)?
+        `<button class="ai-btn" onclick="doAI(this,${JSON.stringify(qClean)})">🤖 AI উত্তর দেখ</button><div class="ai-resp"></div>`:'';
+
+      card.innerHTML=
+        `<div class="q-header" onclick="toggle(this.closest('.q-card'))">
+          <div class="q-num">#${globalIdx}</div>
+          <div class="q-chevron">▼</div>
+          <div class="q-body">
+            <div class="q-text">${qHtml}</div>
+            <div class="q-meta">${uniBadges}</div>
+          </div>
+        </div>
+        <div class="q-answer">
+          <div class="ans-inner">${ansHtml}${aiHtml}</div>
+        </div>`;
+      frag.appendChild(card);
+    });
+    list.appendChild(frag);
+  }
+
+  renderPager(totalPages);
+}
+
+function toggle(card){ card.classList.toggle('open'); }
+
+function quickUni(uni){
+  curUni=uni; curPage=1;
+  document.querySelectorAll('[id^="ub"]').forEach(b=>{
+    b.classList.remove('active');
+    ['ALL','DU','SU','RU','CU','RMU','CMU','BUP','SMU'].forEach(c=>b.classList.remove('uni-active-'+c));
+  });
+  const btn=document.getElementById('ub'+uni);
+  if(btn){btn.classList.add('active','uni-active-'+uni);}
+  applyFilters();
+}
+
+async function doAI(btn, question){
+  const resp=btn.nextElementSibling;
+  if(resp.classList.contains('show')){
+    resp.classList.remove('show');
+    btn.innerHTML='🤖 AI উত্তর দেখ';
+    return;
+  }
+  btn.disabled=true;
+  btn.innerHTML='⏳ লোড হচ্ছে...';
+  resp.className='ai-resp loading show';
+  resp.textContent='AI উত্তর তৈরি হচ্ছে...';
+  try{
+    const r=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:1000,
+        messages:[{role:"user",content:
+          "You are a pharmacology expert helping medical students in Bangladesh (MBBS level). Answer the following exam question clearly and concisely. Structure your answer well. At the end, provide the reference book (Katzung, Rang & Dale, Goodman & Gilman, KD Tripathi, or Misbahuddin) from which the information is based.\n\nQuestion: "+question
+        }]
+      })
+    });
+    const d=await r.json();
+    const txt=d.content&&d.content[0]?d.content[0].text:"উত্তর পাওয়া যায়নি।";
+    resp.className='ai-resp show';
+    resp.textContent=txt;
+    btn.innerHTML='🤖 AI উত্তর লুকাও';
+    btn.disabled=false;
+  }catch(e){
+    resp.className='ai-resp show';
+    resp.textContent='Error: '+e.message;
+    btn.innerHTML='🔁 Retry';
+    btn.disabled=false;
+  }
+}
+
+function renderPager(totalPages){
+  const pg=document.getElementById('pager');
+  pg.innerHTML='';
+  if(totalPages<=1) return;
+
+  const mk=(lbl,p,dis,active)=>{
+    const b=document.createElement('button');
+    b.className='pbtn'+(active?' active':'');
+    b.textContent=lbl; b.disabled=dis;
+    if(!dis) b.onclick=()=>{curPage=p;render();window.scrollTo({top:0,behavior:'smooth'});};
+    return b;
+  };
+
+  pg.appendChild(mk('«',curPage-1,curPage===1,false));
+  let s=Math.max(1,curPage-2), e=Math.min(totalPages,curPage+2);
+  if(s>1){pg.appendChild(mk('1',1,false,false));if(s>2){const d=document.createElement('span');d.className='pdots';d.textContent='…';pg.appendChild(d);}}
+  for(let p=s;p<=e;p++) pg.appendChild(mk(p,p,false,p===curPage));
+  if(e<totalPages){if(e<totalPages-1){const d=document.createElement('span');d.className='pdots';d.textContent='…';pg.appendChild(d);}pg.appendChild(mk(totalPages,totalPages,false,false));}
+  pg.appendChild(mk('»',curPage+1,curPage===totalPages,false));
+}
+
+let st;
+document.getElementById('searchBox').addEventListener('input',function(){
+  clearTimeout(st);
+  st=setTimeout(()=>{curSearch=this.value.trim();curPage=1;applyFilters();},280);
+});
+
+buildSidebar();
+applyFilters();
+</script>
+</body>
+</html>
